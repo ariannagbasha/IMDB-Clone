@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from imdb_app.models import IMDbUser
-
+from imdb_app.models import IMDbUser, Movie
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=150)
@@ -18,3 +18,12 @@ class SignUpForm(forms.ModelForm):
             "first_name",
             "last_name",
         ]
+
+
+class ReviewForm(forms.Form):
+    title = forms.CharField(max_length=50)
+    stars = forms.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(10.0)])
+
+
+
+

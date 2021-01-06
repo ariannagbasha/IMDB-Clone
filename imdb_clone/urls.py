@@ -23,4 +23,6 @@ urlpatterns = [
     path("login/", views.LoginView.as_view(), name="login"),
     path("logout/", views.user_logout, name="logout"),
     path("sign_up/", views.SignUp.as_view(), name="sign_up"),
+    path("movie_detail/<int:movie_id>/", views.movie_detail, name="movie_detail"),
+    path("reviews/<int:movie_id>/", views.review_submission, name="review")
 ]
