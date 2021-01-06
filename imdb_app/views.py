@@ -52,3 +52,4 @@ class SignUp(LoginRequiredMixin, View):
             )
             login(request, newuser)
             return HttpResponseRedirect(reverse("homepage"))
+
