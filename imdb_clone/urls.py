@@ -18,6 +18,8 @@ from django.urls import path, include
 from imdb_app import views
 from django.conf.urls import handler404, handler500, url
 from imdb_app import views as imdb_app_views
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -26,8 +28,11 @@ urlpatterns = [
     path("login/", views.LoginView.as_view(), name="login"),
     path("logout/", views.user_logout, name="logout"),
     path("sign_up/", views.SignUp.as_view(), name="sign_up"),
-    url(r'^imdb_app/', include('imdb_app.urls', namespace='imdb_app')),
-]
+    path('error_500', views.error_500, name='data'),
+    path('error_404', views.error_404, name='data'),
 
-handler404 = imdb_app_views.error_404
-handler500 = imdb_app_views.error_500
+
+]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

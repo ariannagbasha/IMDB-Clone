@@ -1,34 +1,39 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.utils import timezone
 from django.db.models import Model
-
-# Create your models here.
 
 
 class IMDbUser(AbstractUser):
     username = models.CharField(max_length=50, unique=True)
-    email = models.EmailField((""), max_length=254)
-    seenmovies = models.ManyToManyField(
-        "self",
-        related_name="users_movies",
-        symmetrical=False
-    )
-    wanttosee = models.ManyToManyField(
-        "self",
-        related_name="must_see_movies",
+    email = models.EmailField(max_length=254)
+    seen_movies = models.ManyToManyField(
+        "Movie",
+        blank=True,
         symmetrical=False,
+        related_name='seen_movies'
+    )
+    want_list_movies = models.ManyToManyField(
+        "Movie",
+        blank=True,
+        symmetrical=False,
+        related_name='want_list_movies'
     )
 
 
 class Movie(models.Model):
     title = models.CharField(max_length=350)
-    rating = models.FloatField(null=True, default=5)
-    crew = models.CharField(max_length=50)
-    image = models.URLField(max_length=200)
+    rating = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(10.0)])
+    counting = models.IntegerField()
+    crew = models.CharField(max_length=1000)
+    image = models.URLField(max_length=1000)
 
 
 class Review(models.Model):
     title = models.CharField(max_length=50)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    author = models.ForeignKey(IMDbUser, on_delete=models.CASCADE)
+    stars = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(10.0)])
     created_at = models.DateTimeField(default=timezone.now)

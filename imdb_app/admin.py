@@ -1,6 +1,9 @@
+
 from django.contrib import admin
-from imdb_app.models import IMDbUser
-from django.contrib.auth.admin import UserAdmin
+from imdb_app.models import Movie, Review, IMDbUser
 
 
-admin.site.register(IMDbUser, UserAdmin)
+admin.site.register(Movie)
+admin.site.register(Review)
+admin.site.register(IMDbUser)
+

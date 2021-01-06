@@ -54,11 +54,15 @@ class SignUp(LoginRequiredMixin, View):
             return HttpResponseRedirect(reverse("homepage"))
 
 
-def error_404(request):
-    data = {}
-    return render(request, 'imdb_app/404.html', data)
+def error_404(self, request):
+    if request.method == 'GET':
+        data = data.objects.all()
+        return render((request, './media/images/1-10.png',
+                       {'1-10': data}))
 
 
-def error_500(request):
-    data = {}
-    return render(request, 'imdb_app/500.html', data)
+def error_500(self, request):
+    if request.method == 'GET':
+        data = data.objects.all()
+        return render((request, './media/images/500.png',
+                       {'500': data}))
