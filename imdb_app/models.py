@@ -9,12 +9,12 @@ class IMDbUser(AbstractUser):
     username = models.CharField(max_length=50, unique=True)
     email = models.EmailField(_(""), max_length=254)
     seen_movies = models.ManyToManyField(
-        "self",
+        "Movie",
         blank=True,
         symmetrical=False,
     )
     want_to_see = models.ManyToManyField(
-        "self",
+        "Movie",
         blank=True,
         symmetrical=False,
     )
