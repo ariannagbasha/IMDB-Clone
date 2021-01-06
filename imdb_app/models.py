@@ -1,13 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
-
-# Create your models here.
+from django.db.models import Model
 
 
 class IMDbUser(AbstractUser):
     username = models.CharField(max_length=50, unique=True)
-    email = models.EmailField(_(""), max_length=254)
+    email = models.EmailField((""), max_length=254)  
     seen_movies = models.ManyToManyField(
         "self",
         blank=True,
@@ -18,18 +17,15 @@ class IMDbUser(AbstractUser):
         blank=True,
         symmetrical=False,
     )
+
 class Movie(models.Model):
     title = models.CharField(max_length=350)
-    rating = models.FloatField(_(""))
-    crew = models.CharField(_(""))
-    image = models.URLField(_(""))
+    rating = models.FloatField((""))
+    cast = models.CharField((""))
+    image = models.URLField((""))
+
 
 class Review(models.Model):
     title = models.CharField(max_length=50)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
     created_at = models.DateTimeField(default=timezone.now)
-
-
-
-
-
