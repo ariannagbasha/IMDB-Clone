@@ -1,5 +1,14 @@
 <strong>Title: {{ movie.title }} </strong> 
 <strong>Stars: {{ movie.stars }} </strong> 
 <strong>Stars: {{ movie.rating }} </strong> 
+<strong>Crew: {{ movie.crew }} </strong> 
+
 <img src="{{ movie.image }}"/>
 <h3><a href="/reviews/{{ movie.id }}">Review this Movie</a></h3>
+
+{% for review in reviews%}
+
+    <li>Review: {{ review.title }}</li>
+    <li>By: {{ review.author}}</li>
+
+{% endfor %}
