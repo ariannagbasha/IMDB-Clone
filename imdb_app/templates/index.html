@@ -1,0 +1,17 @@
+<h1>IMDB Movies</h1>
+
+{% if request.user.is_authenticated %}
+<h1>Hello, {{ request.user.first_name }} {{ request.user.last_name }}</h1>
+<h2>{{ request.user.username }}</h2>
+<p><a href="/logout/">logout</a>
+    <a href="/sign_up/">signup</a>
+
+</p>
+{% else %}
+<h1>not logged in</h1>
+<p>
+    <a href="/sign_up/">signup</a>
+    <a href="/login/">login</a>
+
+</p>
+{% endif %}
