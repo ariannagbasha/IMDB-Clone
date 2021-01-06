@@ -2,8 +2,6 @@
 from django.contrib import admin
 from imdb_app.models import Movie, Review, IMDbUser
 
-# Register your models here.
-admin.site.register(Movie, Review)
-admin.site.register(IMDbUser)
+models = ['Movie', 'Review', 'IMDBUser']
+admin.site.register(models)
 
-# Register your models here.
