@@ -12,12 +12,14 @@ class IMDbUser(AbstractUser):
     seen_movies = models.ManyToManyField(
         "Movie",
         blank=True,
-        symmetrical=True,
+        symmetrical=False,
+        related_name='seen_movies'
     )
     want_list_movies = models.ManyToManyField(
         "Movie",
         blank=True,
-        symmetrical=True,
+        symmetrical=False,
+        related_name='want_list_movies'
     )
 class Movie(models.Model):
     title = models.CharField(max_length=350)
