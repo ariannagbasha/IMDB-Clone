@@ -14,8 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from imdb_app import views
+from django.conf.urls import handler404, handler500, url
+from imdb_app import views as imdb_app_views
+
 
 urlpatterns = [
     path("", views.Index.as_view(), name="homepage"),
@@ -23,4 +26,8 @@ urlpatterns = [
     path("login/", views.LoginView.as_view(), name="login"),
     path("logout/", views.user_logout, name="logout"),
     path("sign_up/", views.SignUp.as_view(), name="sign_up"),
+    url(r'^imdb_app/', include('imdb_app.urls', namespace='imdb_app')),
 ]
+
+handler404 = imdb_app_views.error_404
+handler500 = imdb_app_views.error_500

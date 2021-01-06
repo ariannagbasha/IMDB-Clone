@@ -52,3 +52,13 @@ class SignUp(LoginRequiredMixin, View):
             )
             login(request, newuser)
             return HttpResponseRedirect(reverse("homepage"))
+
+
+def error_404(request):
+    data = {}
+    return render(request, 'imdb_app/404.html', data)
+
+
+def error_500(request):
+    data = {}
+    return render(request, 'imdb_app/500.html', data)
