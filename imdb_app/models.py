@@ -13,7 +13,7 @@ class IMDbUser(AbstractUser):
         blank=True,
         symmetrical=False,
     )
-    want_to_see = models.ManyToManyField(
+    want_list_movies = models.ManyToManyField(
         "Movie",
         blank=True,
         symmetrical=False,
