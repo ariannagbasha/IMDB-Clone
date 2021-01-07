@@ -12,7 +12,8 @@ from django.db.models import Q
 class Index(View):
     def get(self, request):             
         html = 'index.html'
-        context = {}
+        image = '../media/images/1-10.png'
+        context = {'image': image}
         return render(request, html, context)
 
 class Movies(View):
@@ -113,14 +114,14 @@ class SignUp(View):
 def error_404(self, request):
     if request.method == 'GET':
         data = data.objects.all()
-        return render((request, './media/images/1-10.png',
+        return render((request, '../media/images/1-10.png',
                        {'1-10': data}))
 
 
 def error_500(self, request):
     if request.method == 'GET':
         data = data.objects.all()
-        return render((request, './media/images/500.png',
+        return render((request, '../media/images/500.png',
                        {'500': data}))
 
 def movie_detail(request, movie_id):
