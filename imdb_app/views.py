@@ -5,6 +5,9 @@ from imdb_app.forms import LoginForm, SignUpForm, ReviewForm
 from django.views.generic import View, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from imdb_app.models import IMDbUser, Movie, Review
+from imdb_app.models import IMDbUser, Movie
+from django.db.models import Q
+
 
 
 class Index(View):
@@ -96,4 +99,13 @@ def review_submission(request, movie_id):
             return HttpResponseRedirect(reverse("homepage"))
     form = ReviewForm()
     return render(request, html, {'form': form})
+
+
+def search_results_view(request, search_query):
+    html = "search_results.html"
+    results = Movie.objects.filter(
+        Q(title__icontains=search_query) | Q(crew__icontains=search_query)
+    )
+    context = {'results': results, 'search_query': search_query }
+    return render(request, html, context)
 
