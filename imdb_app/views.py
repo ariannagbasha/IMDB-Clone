@@ -41,6 +41,7 @@ def watchlist(request, movie_id):
 class UserProfileView(LoginRequiredMixin, View):
     def get(self, request, user_id):
         user = IMDbUser.objects.get(id=user_id)
+        print(user.first_name)
         seen_movies = user.seen_movies.all()
         want_list_movies = user.want_list_movies.all()               
         html = 'profile.html'
@@ -57,6 +58,7 @@ class LoginView(TemplateView):
         if form.is_valid():
             data = form.cleaned_data
             username = data['username']
+            email = data['email']
             password = data['password']
             user = authenticate(
                 request, username=username, password=password
