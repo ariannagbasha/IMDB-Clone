@@ -5,6 +5,7 @@ from imdb_app.forms import LoginForm, SignUpForm
 from django.views.generic import View, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from imdb_app.models import IMDbUser
+from django.template import RequestContext
 
 
 class Index(View):
@@ -54,15 +55,17 @@ class SignUp(LoginRequiredMixin, View):
             return HttpResponseRedirect(reverse("homepage"))
 
 
-def error_404(self, request):
-    if request.method == 'GET':
-        data = data.objects.all()
-        return render((request, './media/images/1-10.png',
-                       {'1-10': data}))
+def handler404(request, *args, **argv):
+    context = {}
+    response = render(None, '404.html', {},
+                      context)
+    response.status_code = 404
+    return response
 
 
-def error_500(self, request):
-    if request.method == 'GET':
-        data = data.objects.all()
-        return render((request, './media/images/500.png',
-                       {'500': data}))
+def handler500(request, *args, **argv):
+    context = {}
+    response = render(None, '500.html', {},
+                      context)
+    response.status_code = 500
+    return response

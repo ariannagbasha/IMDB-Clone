@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
 <h1>IMDB Movies</h1>
-<img src="./media/images/500.png">
 {% if request.user.is_authenticated %}
 <h1>Hello, {{ request.user.first_name }} {{ request.user.last_name }}</h1>
 <h2>{{ request.user.username }}</h2>

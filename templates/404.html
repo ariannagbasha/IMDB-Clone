@@ -1,1 +1,9 @@
-<img style="width: 245px; height: 247px;" alt="Image description" src="{% static 'media/images/1-10.png' %}" />
+{%block content%}
+<h1> 404 Error Page </h1>
+<div class="jumbotron">
+<h1 class="display-4"> Page Not Found </h1>
+<p class="lead">Sorry, This page is missing or does not exist</p>
+<hr class="my-4">
+<a class="btn btn-primary btn-lg" href="{% url 'homepage' %}" role="button">Go to our Home Page</a>
+</div>
+{%endblock content%}
