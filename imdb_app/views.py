@@ -95,9 +95,15 @@ class SignUp(View):
         if form.is_valid():
             data = form.cleaned_data
             username = data['username']
+            email = data['email']
+            first_name = data['first_name']
+            last_name = data['last_name']
             password = data['password']
             newuser = IMDbUser.objects.create_user(
                 username=username,
+                email = email,
+                first_name=first_name,
+                last_name=last_name,
                 password=password,
             )
             if newuser:
