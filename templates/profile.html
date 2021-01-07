@@ -1,0 +1,30 @@
+{% if not request.user.is_superuser %}
+
+    {{ user.username }}'s Profile
+    <br><br>
+    Name: {{ user.first_name }} {{ user.last_name }}
+    <br>
+    Email: {{ user.email }}
+    <br><br>
+    Movies I've seen: 
+    <ul>
+    {% for movie in seen_movies %}
+        <li>{{ movie }}</li>
+    {% endfor %}
+    </ul>
+    <br>
+    Movies on my watchlist:
+    <ul>
+    {% for movie in want_list_movies %}
+        <li>{{ movie }}</li>
+    {% endfor %}
+    </ul>
+<br>
+<a href='/'>Return to homepage</a>
+
+{% else %}
+    You are currently logged in as an administrator. <br><br>
+    Please <a href='/logout/'>log out</a> to access the profile of a user. <br><br>
+    <a href='/'>Return to homepage</a>
+
+{% endif %}

@@ -1,0 +1,9 @@
+<h3>All Movies</h3>
+
+<ul>
+{% for movie in movies %}
+    <li>{{ movie.title }} <a href='/seen/{{ movie.id }}'>I've seen this</a>  <a href='/watchlist/{{ movie.id }}'>I want to see this</a></li> 
+{% endfor %}
+</ul>
+
+<a href='/'>Return to homepage</a>
