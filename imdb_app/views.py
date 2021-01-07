@@ -53,6 +53,7 @@ class SignUp(LoginRequiredMixin, View):
             login(request, newuser)
             return HttpResponseRedirect(reverse("homepage"))
 
+
 def movie_detail(request, movie_id):
     html = "movie_detail.html"
     get_movie = Movie.objects.get(id=movie_id)
