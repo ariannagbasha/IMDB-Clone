@@ -1,0 +1,12 @@
+<h1>Search Results for {{ search_query }}</h1>
+
+    {% for result in results %}
+        <ul>
+            <h3>{{ result.title }}</h3>
+            <img src={{result.image}} alt={{result.title}}>
+            <p>Rating: {{ result.rating }}</p>
+            <p>User ratings: {{ result.counting }}</p>
+            <p>{{ result.crew }}</p>
+            <br>
+        </ul>
+    {% endfor %}
