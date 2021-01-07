@@ -59,7 +59,6 @@ class LoginView(TemplateView):
         if form.is_valid():
             data = form.cleaned_data
             username = data['username']
-            email = data['email']
             password = data['password']
             user = authenticate(
                 request, username=username, password=password
