@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import environ
+import os
 
 env = environ.Env()
 environ.Env.read_env()
@@ -30,6 +31,8 @@ SECRET_KEY = env("SECRET_KEY")
 DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
+MEDIA_ROOT =  BASE_DIR / 'media'
+MEDIA_URL = '/media/'
 
 
 # Application definition
