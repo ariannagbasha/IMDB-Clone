@@ -3,7 +3,6 @@ from django.contrib.auth.models import AbstractUser
 
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.utils import timezone
-from django.db.models import Model
 
 
 class IMDbUser(AbstractUser):
@@ -22,6 +21,9 @@ class IMDbUser(AbstractUser):
         related_name='want_list_movies'
     )
 
+    def __str__(self):
+        return self.username
+
 
 class Movie(models.Model):
     title = models.CharField(max_length=350)
@@ -30,6 +32,9 @@ class Movie(models.Model):
     crew = models.CharField(max_length=1000)
     image = models.URLField(max_length=1000)
 
+    def __str__(self):
+        return self.title
+
 
 class Review(models.Model):
     title = models.CharField(max_length=50)
@@ -37,3 +42,6 @@ class Review(models.Model):
     author = models.ForeignKey(IMDbUser, on_delete=models.CASCADE)
     stars = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(10.0)])
     created_at = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f'{self.title} - ({self.stars})'
