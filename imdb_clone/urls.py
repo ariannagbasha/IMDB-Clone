@@ -30,7 +30,8 @@ urlpatterns = [
     path("sign_up/", views.SignUp.as_view(), name="sign_up"),
     path('error_500', views.error_500, name='data'),
     path('error_404', views.error_404, name='data'),
-
+    path("movie_detail/<int:movie_id>/", views.movie_detail, name="movie_detail"),
+    path("reviews/<int:movie_id>/", views.review_submission, name="review")
 
 ]
 if settings.DEBUG:
