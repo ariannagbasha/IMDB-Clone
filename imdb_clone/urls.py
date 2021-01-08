@@ -32,12 +32,11 @@ urlpatterns = [
     path("login/", views.LoginView.as_view(), name="login"),
     path("logout/", views.user_logout, name="logout"),
     path("sign_up/", views.SignUp.as_view(), name="sign_up"),
-    path('error_500', views.error_500, name='data'),
-    path('error_404', views.error_404, name='data'),
+    path('error_500', views.handler500, name="handler500"),
+    path('error_404', views.handler404, name="handler404"),
     path("movie_detail/<int:movie_id>/", views.movie_detail, name="movie_detail"),
     path("reviews/<int:movie_id>/", views.review_submission, name="review"),
     path("search/<search_query>/", views.search_results_view, name="search_results")
 ]
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL,
-                        document_root=settings.MEDIA_ROOT)
+handler404 = 'imdb_app.views.handler404'
+handler500 = 'imdb_app.views.handler500'
