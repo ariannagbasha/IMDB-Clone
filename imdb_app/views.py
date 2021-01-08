@@ -2,7 +2,7 @@ from django.shortcuts import render, reverse, HttpResponseRedirect, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from imdb_app.forms import LoginForm, SignUpForm, ReviewForm
-from django.views.generic import View, TemplateView
+from django.views.generic import View, TemplateView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from imdb_app.models import IMDbUser, Movie, Review
 from django.db.models import Q
@@ -155,3 +155,23 @@ def search_results_view(request, search_query):
     context = {'results': results, 'search_query': search_query }
     return render(request, html, context)
 
+# class SearchResultsView(ListView):
+#     model = Movie
+#     html = "search_results.html"
+
+#     def get_queryset(self):
+#         search_query = self.request.GET.get('q')
+#         results = Movie.objects.filter(
+#             Q(title__icontains=search_query) | Q(crew__icontains=search_query)
+#         )
+#         return results
+
+class SearchResultsView(View):
+    def get(self, request):             
+        html = 'search_results.html'
+        search_query = self.request.GET.get('q')
+        results = Movie.objects.filter(
+            Q(title__icontains=search_query) | Q(crew__icontains=search_query)
+        )
+        context = {'results': results, 'search_query': search_query}
+        return render(request, html, context)
