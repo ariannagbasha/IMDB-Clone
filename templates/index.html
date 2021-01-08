@@ -2,8 +2,12 @@
 {% block content %}
 <h1>IMDB Movies</h1>
 
-<h2>Welcome to IMDb: The Internet Movie Database</h2>
 
+<h2>Welcome to IMDb: The Internet Movie Database</h2>
+<form action="/search/" method="get">
+    <input type="text" name="q">
+    <input type="submit" value="Search">
+</form>
 {% if request.user.is_authenticated or request.user.is_superuser %}
     <h4>Welcome back, <a href='/user/{{user.id}}'>{{ request.user.username }}</a>! </h4>    
     <a href='/movies/'>Browse Movie Database</a>
@@ -14,5 +18,3 @@
     <p>Not registered?<br><a href="/sign_up/">Create an account</a></p>
 {% endif %}
 {% endblock %}
-
-
