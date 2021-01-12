@@ -86,7 +86,7 @@ class SignUp(View):
     form_class = SignUpForm
     def get(self, request):
         form = self.form_class()
-        html = 'generic_form.html'
+        html = 'sign_up.html'
         context = {'form': form}
         return render(request, html, context)
 
@@ -108,8 +108,12 @@ class SignUp(View):
             )
             if newuser:
                 login(request, newuser)
-            return HttpResponseRedirect(reverse("homepage"))
+            return HttpResponseRedirect(reverse("success"))
 
+def sign_up_success(request):
+    html = 'success.html'
+    context = {}
+    return render(request, html, context)
 
 def handler404(request, *args, **argv):
     context = {}

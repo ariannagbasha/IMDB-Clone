@@ -1,0 +1,44 @@
+<style>
+
+    label, input {
+        display: block;
+    }
+
+    label {
+        margin-bottom: 20px;
+    }
+
+</style>
+
+<form method='POST' action=''>
+    {% csrf_token %}
+    <label for='username'>                
+        <input type='text' placeholder="Choose a username" name='username' required>
+    </label>
+    
+
+    <label for='first_name'>        
+        <input type='text' placeholder="First name" name='first_name' required>
+    </label>
+    
+
+    <label for='last_name'>        
+        <input type='text' placeholder="Last name" name='last_name' required>
+    </label>
+    
+
+    <label for='email'>        
+        <input
+            type='email'
+            placeholder="Email"
+            name='email'            
+            required 
+        />
+    </label>
+    
+    <label for='password'>        
+        <input type='password' placeholder="Password" name='password' minlength="8" required>
+    </label>
+    
+    <input type="submit" value="Welcome to IMDB">
+</form>

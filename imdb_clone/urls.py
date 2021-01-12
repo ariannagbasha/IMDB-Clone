@@ -32,6 +32,7 @@ urlpatterns = [
     path("login/", views.LoginView.as_view(), name="login"),
     path("logout/", views.user_logout, name="logout"),
     path("sign_up/", views.SignUp.as_view(), name="sign_up"),
+    path('success/', views.sign_up_success, name='success'),
     path('error_500', views.handler500, name="handler500"),
     path('error_404', views.handler404, name="handler404"),
     path("movie_detail/<int:movie_id>/", views.movie_detail, name="movie_detail"),
