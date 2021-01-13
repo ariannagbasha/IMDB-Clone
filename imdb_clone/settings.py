@@ -11,11 +11,14 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-import environ
-import os
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-env = environ.Env()
-environ.Env.read_env()
+EMAIL_HOST = `smtp.gmail.com`
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'MichaelMDTrep@Gmail.com'
+EMAIL_HOST_PASSWORD = 'MDTrep123'
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env("SECRET_KEY")
+SECRET_KEY = "3!gin2vnl@bg^l%lrxx59$4tl9&k2xdin+vvigt$ae)ba1p7+5"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False

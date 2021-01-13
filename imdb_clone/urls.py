@@ -37,6 +37,8 @@ urlpatterns = [
     path("movie_detail/<int:movie_id>/", views.movie_detail, name="movie_detail"),
     path("reviews/<int:movie_id>/", views.review_submission, name="review"),
     path("search/", views.SearchResultsView.as_view(), name="search_results"),
+    path('subscribe/', include('subscribe.urls')),
+
 ]
 handler404 = 'imdb_app.views.handler404'
 handler500 = 'imdb_app.views.handler500'
