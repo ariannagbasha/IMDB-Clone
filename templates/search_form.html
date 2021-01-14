@@ -1,0 +1,21 @@
+<head>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+</head>
+
+<body>
+  <form action="/search_results/" method="get">
+    <input type="text" name="q" id="q">
+    <input type="submit" value="Search">
+  </form>
+
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#q" ).autocomplete({
+      source: "{% url 'searchautocomplete' %}",
+      minLength: 2
+    });
+  } );
+  </script>
+</body>
