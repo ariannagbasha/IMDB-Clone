@@ -2,10 +2,11 @@ from django.shortcuts import render, reverse, HttpResponseRedirect, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from imdb_app.forms import LoginForm, SignUpForm, ReviewForm
-from django.views.generic import View, TemplateView
+from django.views.generic import View, TemplateView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from imdb_app.models import IMDbUser, Movie, Review
 from django.db.models import Q
+from django.http import JsonResponse
 
 
 
@@ -113,7 +114,7 @@ class SignUp(View):
 
 def handler404(request, *args, **argv):
     context = {}
-    response = render(None, '404.html', {},
+    response = render(None, '404.html',
                       context)
     response.status_code = 404
     return response
@@ -121,7 +122,7 @@ def handler404(request, *args, **argv):
 
 def handler500(request, *args, **argv):
     context = {}
-    response = render(None, '500.html', {},
+    response = render(None, '500.html',
                       context)
     response.status_code = 500
     return response
@@ -155,12 +156,28 @@ def review_submission(request, movie_id):
     form = ReviewForm()
     return render(request, html, {'form': form})
 
+class SearchFormView(View):
+    def get(self, request):
+        html = 'search_form.html'
+        context = {}
+        return render(request, html, context)
 
-def search_results_view(request, search_query):
-    html = "search_results.html"
-    results = Movie.objects.filter(
-        Q(title__icontains=search_query) | Q(crew__icontains=search_query)
-    )
-    context = {'results': results, 'search_query': search_query }
-    return render(request, html, context)
 
+class SearchResultsView(View):
+    def get(self, request):             
+        html = 'search_results.html'
+        search_query = self.request.GET.get('q')
+        results = Movie.objects.filter(
+            Q(title__icontains=search_query) | Q(crew__icontains=search_query)
+        )
+        context = {'results': results, 'search_query': search_query}
+        return render(request, html, context)
+        
+def SearchFormAutocomplete(request):
+    if 'term' in request.GET:
+        qs = Movie.objects.filter(title__icontains=request.GET.get('term'))
+        titles = list()
+        for movie in qs:
+            titles.append(movie.title)
+        return JsonResponse(titles, safe=False)
+    return render(request, 'search_form.html')
