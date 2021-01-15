@@ -14,7 +14,8 @@ class Index(View):
     def get(self, request):             
         html = 'index.html'
         image = '../media/images/1-10.png'
-        context = {'image': image}
+        top_ten_movies = Movie.objects.all().order_by('id')[:10]
+        context = {'image': image, 'movies': top_ten_movies}
         return render(request, html, context)
 
 class Movies(View):

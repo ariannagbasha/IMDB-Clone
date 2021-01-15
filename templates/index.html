@@ -17,3 +17,9 @@
     <p>Not registered?<br><a href="/sign_up/">Create an account</a></p>
 {% endif %}
 {% endblock %}
+
+{% for movie in movies %}
+    <div class="card">
+        {{ movie.title }}
+    </div>
+{% endfor %}
