@@ -88,7 +88,7 @@ class SignUp(View):
     form_class = SignUpForm
     def get(self, request):
         form = self.form_class()
-        html = 'generic_form.html'
+        html = 'sign_up.html'
         context = {'form': form}
         return render(request, html, context)
 
@@ -110,12 +110,20 @@ class SignUp(View):
             )
             if newuser:
                 login(request, newuser)
-            return HttpResponseRedirect(reverse("homepage"))
+            return HttpResponseRedirect(reverse("success"))
 
+def sign_up_success(request):
+    html = 'success.html'
+    context = {}
+    return render(request, html, context)
 
 def handler404(request, *args, **argv):
     context = {}
+<<<<<<< HEAD
     response = render(None, '404.html',
+=======
+    response = render(None, '404.html', 
+>>>>>>> master
                       context)
     response.status_code = 404
     return response
@@ -123,7 +131,11 @@ def handler404(request, *args, **argv):
 
 def handler500(request, *args, **argv):
     context = {}
+<<<<<<< HEAD
     response = render(None, '500.html',
+=======
+    response = render(None, '500.html', 
+>>>>>>> master
                       context)
     response.status_code = 500
     return response
@@ -164,6 +176,20 @@ class SearchFormView(View):
         return render(request, html, context)
 
 
+<<<<<<< HEAD
+=======
+# class SearchResultsView(ListView):
+#     model = Movie
+#     html = "search_results.html"
+
+#     def get_queryset(self):
+#         search_query = self.request.GET.get('q')
+#         results = Movie.objects.filter(
+#             Q(title__icontains=search_query) | Q(crew__icontains=search_query)
+#         )
+#         return results
+
+>>>>>>> master
 class SearchResultsView(View):
     def get(self, request):             
         html = 'search_results.html'
@@ -172,6 +198,7 @@ class SearchResultsView(View):
             Q(title__icontains=search_query) | Q(crew__icontains=search_query)
         )
         context = {'results': results, 'search_query': search_query}
+<<<<<<< HEAD
         return render(request, html, context)
         
 def SearchFormAutocomplete(request):
@@ -182,3 +209,6 @@ def SearchFormAutocomplete(request):
             titles.append(movie.title)
         return JsonResponse(titles, safe=False)
     return render(request, 'search_form.html')
+=======
+        return render(request, html, context)
+>>>>>>> master
