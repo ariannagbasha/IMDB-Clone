@@ -1,8 +1,54 @@
-.card {
-  color: red;
-  height: 200px;
-}
-
 h1 {
   color: blue;
+}
+
+body {
+  background: grey;
+}
+
+.movies {
+  display: grid;
+  place-items: center;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  overflow-y: hidden;
+}
+
+.cards {
+  margin-top: 10vh;
+  display: flex;
+}
+
+.card {
+  background: white;
+  height: 300px;
+  width: 300px;
+  border-radius: 1rem;
+  /* padding: 2rem; */
+  box-shadow: 4px 4px 12px 2px white;
+  transition: 0.2s;
+}
+
+.card:not(:first-child) {
+  margin-left: -4rem;
+}
+
+.card:hover,
+.card:focus-within {
+  transform: translateY(-1rem);
+}
+
+.card:hover ~ .card,
+.card:focus-within ~ .card {
+  transform: translateX(4rem);
+}
+
+.card image {
+  width: 70%;
+}
+
+.movie {
+  height: 100%;
+  width: 100%;
 }

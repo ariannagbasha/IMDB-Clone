@@ -13,9 +13,14 @@
     <p>Not registered?<br><a href="/sign_up/">Create an account</a></p>
 {% endif %}
 {% endblock %}
-
-{% for movie in movies %}
-    <div class="card">
-        {{ movie.title }}
+<div class="movies">
+    <div class="cards">
+        {% for movie in movies %}
+            <div class="card">
+                <a href="/movie_detail/{{ movie.id }}">
+                    <img class="movie" src={{ movie.image }} alt={{ movie.title }}>
+                </a>
+            </div>
+        {% endfor %}
     </div>
-{% endfor %}
+</div>
