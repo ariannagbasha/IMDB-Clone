@@ -1,10 +1,7 @@
-h1 {
-  color: blue;
-}
-
-body {
-  background: grey;
-}
+/*
+Used Movable Card Row Tutorial:
+https://css-tricks.com/video-screencasts/171-movable-stacked-card-row-in-css/
+*/
 
 .movies {
   display: grid;
@@ -26,7 +23,7 @@ body {
   width: 300px;
   border-radius: 1rem;
   /* padding: 2rem; */
-  box-shadow: 4px 4px 12px 2px white;
+  box-shadow: 4px 4px 12px 2px green;
   transition: 0.2s;
 }
 
