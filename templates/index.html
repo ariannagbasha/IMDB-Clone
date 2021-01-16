@@ -18,7 +18,7 @@
         {% for movie in movies %}
             <div class="card">
                 <a href="/movie_detail/{{ movie.id }}">
-                    <img class="movie" src={{ movie.image }} alt={{ movie.title }}>
+                    <img class="movie" src="https://tiny.pictures/api/demo/?width=300&height=300&source={{movie.image}}" alt={{ movie.title }} loading="lazy">
                 </a>
             </div>
         {% endfor %}
