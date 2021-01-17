@@ -80,7 +80,7 @@ class LoginView(TemplateView):
 
     def get(self, request):
         form = self.form_class()
-        html = 'generic_form.html'
+        html = 'login.html'
         context = {'form': form}
 
         return render(request, html, context)
@@ -144,25 +144,26 @@ def movie_detail(request, movie_id):
     movie = Movie.objects.get(id=movie_id)    
     if request.user.is_authenticated:
         user = IMDbUser.objects.get(id=request.user.id)
-        ids = list(History.objects.all().values_list('movie_id', flat=True))        
-        if movie_id in ids:
-            hist_obj = History.objects.get(movie_id=movie_id)
+        ids = list(History.objects.all().values_list('movie_id', flat=True))               
+        if movie_id not in ids:       
+            hist_obj = History.objects.create(
+            title = movie.title,
+            movie_id = movie_id
+            )
+            user.recently_viewed.add(hist_obj)
+            user.save()
+        else:           
+            hist_obj = History.objects.get(movie_id=movie_id)            
             user.recently_viewed.remove(hist_obj)
             user.save()
-            
+            hist_obj.delete()          
+
             hist_obj = History.objects.create(
             title = movie.title,
             movie_id = movie_id
             )
             user.recently_viewed.add(hist_obj)
-            user.save()
-        else:
-            hist_obj = History.objects.create(
-            title = movie.title,
-            movie_id = movie_id
-            )
-            user.recently_viewed.add(hist_obj)
-            user.save()
+            user.save()  
 
     reviews = Review.objects.filter(movie=movie)
     context = {"movie": movie, "reviews": reviews}

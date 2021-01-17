@@ -1,3 +1,15 @@
+<style>
+    h3 {
+        display: inline
+    }
+</style>
+
+<h3><a href='/movies/'>All Movies</a></h3> | 
+<h3><a href='/user/{{user.id}}/'>Profile</a></h3> | 
+<h3><a href='/'>Return to Homepage</a> | 
+<h3><a href='/logout/'>Log out</a></h3>
+<br><br>
+
 <strong>Title: {{ movie.title }} </strong> 
 <strong>Stars: {{ movie.stars }} </strong> 
 <strong>Stars: {{ movie.rating }} </strong> 
@@ -6,9 +18,7 @@
 <img src="{{ movie.image }}"/>
 <button><a href='/seen/{{ movie.id }}'>I've seen this</a></button>
 <button><a href='/watchlist/{{ movie.id }}'>I want to see this</a></button>
-<h3><a href="/reviews/{{ movie.id }}">Review this Movie</a></h3>
-<h3><a href='/movies/'>Continue Browsing</a></h3>
-<h3><a href='/'>Return to Homepage</a></h3>
+
 {% for review in reviews%}
 
     <li>Review: {{ review.title }}</li>

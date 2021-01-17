@@ -6,7 +6,10 @@
 
 {% if not request.user.is_superuser %}
 
-<h3><a href='/movies/'>All Movies</a></h3> | <h3><a href='/user/{{user.id}}/'>Profile</a></h3> | <h3><a href='/'>Return to Homepage</a> | <h3><a href='/logout/'>Log out</a></h3>
+<h3><a href='/movies/'>All Movies</a></h3> | 
+<h3><a href='/user/{{user.id}}/'>Profile</a></h3> | 
+<h3><a href='/'>Return to Homepage</a> | 
+<h3><a href='/logout/'>Log out</a></h3>
 
 <br><br>
     {{ user.username }}'s Profile
@@ -37,9 +40,6 @@
         {% endfor %}
     </ul>
 {% endif %}
-<br>
-<a href='/'>Return to homepage</a>
-
 
 {% else %}
     You are currently logged in as an administrator. <br><br>
