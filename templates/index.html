@@ -24,3 +24,12 @@
         {% endfor %}
     </div>
 </div>
+<br>
+{% if recently_viewed %}
+    Recently Viewed:
+    <ul>
+        {% for movie in recently_viewed %}
+            <li><a href='/movie_detail/{{ movie.movie_id }}/'>{{ movie.title }}</a></li>
+        {% endfor %}
+    </ul>
+{% endif %}

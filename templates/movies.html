@@ -1,4 +1,10 @@
-<h3>All Movies</h3>
+<style>
+    h3 {
+        display: inline
+    }
+</style>
+
+<h3>All Movies</h3> | <h3><a href='/user/{{user.id}}'>Profile</a></h3> | <h3><a href='/'>Return to Homepage</a> | <h3><a href='/'>Log out</a></h3>
 
 <ul>
 {% for movie in movies %}
