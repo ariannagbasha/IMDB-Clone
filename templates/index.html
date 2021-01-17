@@ -4,10 +4,12 @@
 {% block content %}
 <h1>Welcome to IMDb: The Internet Movie Database</h1>
 {% if request.user.is_authenticated or request.user.is_superuser %}
-    <h4>Welcome back, <a href='/user/{{user.id}}'>{{ request.user.username }}</a>! </h4>    
-    <a href='/movies/'>Browse Movie Database</a>
-    <br><br>    
-    <a href="/logout/">Log out</a>    
+
+    <h3><a href='/movies/'>All Movies</a></h3> |
+    <h3><a href='/user/{{user.id}}/'>Profile</a></h3> |    
+    <h3><a href='/logout/'>Log out</a></h3>
+  
+     
 {% else %}
     <p>You are not currently logged in.<br><a href='/login/'>Log in</a></p>
     <p>Not registered?<br><a href="/sign_up/">Create an account</a></p>

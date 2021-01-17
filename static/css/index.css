@@ -49,3 +49,7 @@ https://css-tricks.com/video-screencasts/171-movable-stacked-card-row-in-css/
   height: 100%;
   width: 100%;
 }
+
+h3, a {
+  display: inline
+}

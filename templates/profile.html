@@ -1,8 +1,5 @@
-<style>
-    h3 {
-        display: inline
-    }
-</style>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/generic.css' %}">
 
 {% if not request.user.is_superuser %}
 
