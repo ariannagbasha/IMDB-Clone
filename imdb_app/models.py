@@ -21,8 +21,23 @@ class IMDbUser(AbstractUser):
         related_name='want_list_movies'
     )
 
+    recently_viewed = models.ManyToManyField(
+        "History",
+        blank=True,
+        symmetrical=False,
+        related_name='recently_viewed'
+    )
+
     def __str__(self):
         return self.username
+
+
+class History(models.Model):
+    title = models.CharField(max_length=350)
+    movie_id = models.IntegerField(blank=True, null=True)
+
+    def __str__(self):
+        return self.title
 
 
 class Movie(models.Model):

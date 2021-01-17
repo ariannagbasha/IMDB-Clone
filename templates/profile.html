@@ -1,5 +1,14 @@
+<style>
+    h3 {
+        display: inline
+    }
+</style>
+
 {% if not request.user.is_superuser %}
 
+<h3><a href='/movies/'>All Movies</a></h3> | <h3><a href='/user/{{user.id}}/'>Profile</a></h3> | <h3><a href='/'>Return to Homepage</a> | <h3><a href='/logout/'>Log out</a></h3>
+
+<br><br>
     {{ user.username }}'s Profile
     <br><br>
     Name: {{ user.first_name }} {{ user.last_name }}
@@ -9,18 +18,28 @@
     Movies I've seen: 
     <ul>
     {% for movie in seen_movies %}
-        <li>{{ movie }}</li>
+        <li><a href='/movie_detail/{{movie.id}}'>{{ movie.title }}</a></li>
     {% endfor %}
     </ul>
     <br>
     Movies on my watchlist:
     <ul>
     {% for movie in want_list_movies %}
-        <li>{{ movie }}</li>
+         <li><a href='/movie_detail/{{movie.id}}'>{{ movie.title }}</a></li>
     {% endfor %}
     </ul>
 <br>
+{% if recently_viewed %}
+    Recently Viewed:
+    <ul>
+        {% for movie in recently_viewed %}
+            <li><a href='/movie_detail/{{ movie.movie_id }}/'>{{ movie.title }}</a></li>
+        {% endfor %}
+    </ul>
+{% endif %}
+<br>
 <a href='/'>Return to homepage</a>
+
 
 {% else %}
     You are currently logged in as an administrator. <br><br>
