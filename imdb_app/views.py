@@ -7,6 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from imdb_app.models import IMDbUser, Movie, Review, History
 from django.db.models import Q
 from django.http import JsonResponse
+import random
 
 
 
@@ -16,11 +17,15 @@ class Index(View):
         if request.user.is_authenticated:
             user = IMDbUser.objects.get(id=request.user.id)
             recently_viewed = user.recently_viewed.all().order_by('-id')[:10]                                    
-            
         html = 'index.html'
         image = '../media/images/1-10.png'
         top_ten_movies = Movie.objects.all().order_by('id')[:10]
-        context = {'image': image, 'movies': top_ten_movies, 'recently_viewed': recently_viewed}
+        random_movies = Movie.objects.all().order_by('?')[:20]
+        watchlist = ''
+        if request.user.is_authenticated:
+            user = IMDbUser.objects.get(id=request.user.id)
+            watchlist = user.want_list_movies.all()
+        context = {'image': image, 'movies': top_ten_movies, 'watchlist': watchlist, 'random': random_movies, 'recently_viewed': recently_viewed}
         return render(request, html, context)
 
 class Movies(View):

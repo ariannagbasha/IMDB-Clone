@@ -1,0 +1,173 @@
+/*
+Used Movable Card Row Tutorial:
+https://css-tricks.com/video-screencasts/171-movable-stacked-card-row-in-css/
+*/
+
+:root {
+  --mainColor: rgb(0, 0, 0);
+  --secondaryColor: rgb(244, 197, 24);
+  --textColor: rgb(255, 255, 255);
+}
+
+body {
+  background-color: var(--mainColor);
+  width: 100vw;
+}
+
+h1 {
+  color: var(--secondaryColor);
+}
+
+h2,
+h3,
+h4,
+h5,
+p {
+  color: var(--textColor);
+}
+
+a {
+  color: var(--secondaryColor);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+nav ul li:first-child a {
+  display: block;
+  padding: 8px;
+  background-color: var(--secondaryColor);
+  color: black;
+  font-weight: 900;
+  border-radius: 0.7rem;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 1rem;
+  display: flex;
+  border-bottom: 3px solid var(--secondaryColor);
+}
+
+nav ul li {
+  width: 10%;
+
+  font-size: x-large;
+}
+
+nav ul li:not(:last-child) {
+  padding-right: 5%;
+}
+
+nav ul li:not(:first-child) {
+  margin-top: 0.5%;
+}
+
+.searchForm {
+  position: relative;
+}
+
+.searchForm input[type='text']:focus {
+  /* border: 3px solid var(--mainColor); */
+  outline: none;
+}
+
+.searchBar {
+  width: 100%;
+  padding: 6px;
+}
+
+.searchButton {
+  padding: 6px;
+  position: absolute;
+  border-style: none;
+  top: 0;
+  right: 0;
+}
+
+.searchImport {
+  width: 100%;
+}
+
+#lightMode {
+  --mainColor: rgb(255, 255, 255);
+  --secondaryColor: rgb(244, 197, 24);
+  --textColor: rgb(0, 0, 0);
+}
+
+#darkMode {
+  --mainColor: rgb(0, 0, 0);
+  --secondaryColor: rgb(244, 197, 24);
+  --textColor: rgb(255, 255, 255);
+}
+
+.movies {
+  background-color: var(--mainColor);
+  display: grid;
+  place-items: center flex-start;
+  color: var(--textColor);
+}
+
+.movies h2 {
+  margin-top: 5%;
+}
+
+.movieList {
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  overflow-y: hidden;
+}
+
+.cards {
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+  padding-top: 1rem;
+  height: 19.75rem;
+  display: flex;
+  overflow: auto;
+}
+
+.movies section {
+  width: 100vw;
+}
+
+.card {
+  height: 300px;
+  width: 300px;
+  min-width: 300px;
+  min-height: 300px;
+  border-radius: 1rem;
+  box-shadow: 4px 4px 12px 2px var(--secondaryColor);
+  transition: 0.2s;
+}
+
+.card:not(:first-child) {
+  margin-left: -4rem;
+}
+
+.card:hover,
+.card:focus-within {
+  transform: translateY(-1rem);
+}
+
+.card:hover ~ .card,
+.card:focus-within ~ .card {
+  transform: translateX(4rem);
+}
+
+.card image {
+  width: 70%;
+}
+
+.movie {
+  height: 100%;
+  width: 100%;
+}
