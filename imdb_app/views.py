@@ -7,6 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from imdb_app.models import IMDbUser, Movie, Review
 from django.db.models import Q
 from django.http import JsonResponse
+import random
 
 
 
@@ -15,7 +16,12 @@ class Index(View):
         html = 'index.html'
         image = '../media/images/1-10.png'
         top_ten_movies = Movie.objects.all().order_by('id')[:10]
-        context = {'image': image, 'movies': top_ten_movies}
+        random_movies = Movie.objects.all().order_by('?')[:20]
+        watchlist = ''
+        if request.user.is_authenticated:
+            user = IMDbUser.objects.get(id=request.user.id)
+            watchlist = user.want_list_movies.all()
+        context = {'image': image, 'movies': top_ten_movies, 'watchlist': watchlist, 'random': random_movies}
         return render(request, html, context)
 
 class Movies(View):
@@ -184,4 +190,4 @@ def SearchFormAutocomplete(request):
         for movie in qs:
             titles.append(movie.title)
         return JsonResponse(titles, safe=False)
-    return render(request, 'search_form.html')
+    return render(request, 'search_form.html') 

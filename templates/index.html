@@ -1,26 +1,66 @@
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+{% comment %} TODO ADD SCROLL BUTTONS {% endcomment %}
 
-{% block content %}
-<h1>Welcome to IMDb: The Internet Movie Database</h1>
-{% if request.user.is_authenticated or request.user.is_superuser %}
-    <h4>Welcome back, <a href='/user/{{user.id}}'>{{ request.user.username }}</a>! </h4>    
-    <a href='/movies/'>Browse Movie Database</a>
-    <br><br>    
-    <a href="/logout/">Log out</a>    
-{% else %}
-    <p>You are not currently logged in.<br><a href='/login/'>Log in</a></p>
-    <p>Not registered?<br><a href="/sign_up/">Create an account</a></p>
-{% endif %}
-{% endblock %}
-<div class="movies">
-    <div class="cards">
-        {% for movie in movies %}
-            <div class="card">
-                <a href="/movie_detail/{{ movie.id }}">
-                    <img class="movie" src="https://tiny.pictures/api/demo/?width=300&height=300&source={{movie.image}}" alt={{ movie.title }} loading="lazy">
-                </a>
+<body>
+    {% include 'navbar.html' %}
+    {% block content %}
+    <h1>Welcome to IMDb: The Internet Movie Database</h1>
+    {% if request.user.is_authenticated or request.user.is_superuser %}
+        <h4>Welcome back, <a href='/user/{{user.id}}'>{{ request.user.username }}</a>! </h4>    
+    {% endif %}
+    {% endblock %}
+    <div class="movies" id="lightMode">
+        
+        {% if request.user.is_authenticated and watchlist != '' %}
+            <section class="watchlist">
+                <header>
+                    <h2>Current Watchlist</h2>
+                </header>
+
+                <div class="cards">
+                    {% for movie in watchlist %}
+                        <div class="card">
+                            <a href="/movie_detail/{{ movie.id }}">
+                            <img class="movie" src="https://tiny.pictures/api/demo/?width=300&height=300&source={{movie.image}}" alt={{ movie.title }} loading="lazy">
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+        {% endif %}
+
+        <section class="topTen">
+            <header>
+                <h2>Top 10 Movies</h2>
+            </header>
+
+            <div class="cards">
+                {% for movie in movies %}
+                    <div class="card">
+                        <a href="/movie_detail/{{ movie.id }}">
+                            <img class="movie" src="https://tiny.pictures/api/demo/?width=300&height=300&source={{movie.image}}" alt={{ movie.title }} loading="lazy">
+                        </a>
+                    </div>
+                {% endfor %}
             </div>
-        {% endfor %}
+        </section>
+
+        <section class="randomMovies">
+            <header>
+                <h2>Random Picks</h2>
+            </header>
+
+            <div class="cards">
+                {% for movie in random %}
+                    <div class="card">
+                        <a href="/movie_detail/{{ movie.id }}">
+                            <img class="movie" src="https://tiny.pictures/api/demo/?width=300&height=300&source={{movie.image}}" alt={{ movie.title }} loading="lazy">
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
     </div>
-</div>
+    
+</body>
