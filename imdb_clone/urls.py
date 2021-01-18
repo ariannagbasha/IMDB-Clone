@@ -35,11 +35,14 @@ urlpatterns = [
     path('success/', views.sign_up_success, name='success'),
     path('error_500', views.handler500, name="handler500"),
     path('error_404', views.handler404, name="handler404"),
-    path("movie_detail/<int:movie_id>/", views.movie_detail, name="movie_detail"),
+    path("movie_detail/<int:movie_id>/",
+         views.movie_detail, name="movie_detail"),
     path("reviews/<int:movie_id>/", views.review_submission, name="review"),
     path("search/", views.SearchFormView.as_view(), name="search_form"),
     path("search_results/", views.SearchResultsView.as_view(), name="search_results"),
-    path("searchautocomplete/", views.SearchFormAutocomplete, name='searchautocomplete')
-]
+    path("searchautocomplete/", views.SearchFormAutocomplete,
+         name='searchautocomplete')
+]+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
 handler404 = 'imdb_app.views.handler404'
 handler500 = 'imdb_app.views.handler500'
