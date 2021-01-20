@@ -10,13 +10,12 @@ from django.http import JsonResponse
 import random
 
 
-
 class Index(View):
     def get(self, request):
         recently_viewed = []
         if request.user.is_authenticated:
             user = IMDbUser.objects.get(id=request.user.id)
-            recently_viewed = user.recently_viewed.all().order_by('-id')[:10]                                    
+            recently_viewed = user.recently_viewed.all().order_by('-id')[:10]
         html = 'index.html'
         image = '../media/images/1-10.png'
         top_ten_movies = Movie.objects.all().order_by('id')[:10]
@@ -25,8 +24,10 @@ class Index(View):
         if request.user.is_authenticated:
             user = IMDbUser.objects.get(id=request.user.id)
             watchlist = user.want_list_movies.all()
-        context = {'image': image, 'movies': top_ten_movies, 'watchlist': watchlist, 'random': random_movies, 'recently_viewed': recently_viewed}
+        context = {'image': image, 'movies': top_ten_movies, 'watchlist': watchlist,
+                   'random': random_movies, 'recently_viewed': recently_viewed}
         return render(request, html, context)
+
 
 class Movies(View):
     def get(self, request):
@@ -34,6 +35,7 @@ class Movies(View):
         html = 'movies.html'
         context = {'movies': movies}
         return render(request, html, context)
+
 
 @login_required
 def seen_list(request, movie_id):
@@ -43,6 +45,7 @@ def seen_list(request, movie_id):
     user.save()
     return redirect('/movies/')
 
+
 @login_required
 def watchlist(request, movie_id):
     user = IMDbUser.objects.get(id=request.user.id)
@@ -51,12 +54,13 @@ def watchlist(request, movie_id):
     user.save()
     return redirect('/movies/')
 
+
 class UserProfileView(LoginRequiredMixin, View):
     def get(self, request, user_id):
-        user = IMDbUser.objects.get(id=user_id)          
-        recently_viewed = user.recently_viewed.all().order_by('-id')[:10]          
+        user = IMDbUser.objects.get(id=user_id)
+        recently_viewed = user.recently_viewed.all().order_by('-id')[:10]
         seen_movies = user.seen_movies.all()
-        want_list_movies = user.want_list_movies.all()               
+        want_list_movies = user.want_list_movies.all()
         html = 'profile.html'
         context = {
             'user': user,
@@ -66,8 +70,10 @@ class UserProfileView(LoginRequiredMixin, View):
         }
         return render(request, html, context)
 
+
 class LoginView(TemplateView):
     form_class = LoginForm
+
     def post(self, request):
         form = self.form_class(request.POST)
         if form.is_valid():
@@ -76,7 +82,7 @@ class LoginView(TemplateView):
             password = data['password']
             user = authenticate(
                 request, username=username, password=password
-            )            
+            )
             if user or request.user.is_superuser:
                 login(request, user)
                 return HttpResponseRedirect(request.GET.get("next", reverse("homepage")))
@@ -98,6 +104,7 @@ def user_logout(request):
 
 class SignUp(View):
     form_class = SignUpForm
+
     def get(self, request):
         form = self.form_class()
         html = 'sign_up.html'
@@ -115,7 +122,7 @@ class SignUp(View):
             password = data['password']
             newuser = IMDbUser.objects.create_user(
                 username=username,
-                email = email,
+                email=email,
                 first_name=first_name,
                 last_name=last_name,
                 password=password,
@@ -124,10 +131,12 @@ class SignUp(View):
                 login(request, newuser)
             return HttpResponseRedirect(reverse("success"))
 
+
 def sign_up_success(request):
     html = 'success.html'
     context = {}
     return render(request, html, context)
+
 
 def handler404(request, *args, **argv):
     context = {}
@@ -144,31 +153,32 @@ def handler500(request, *args, **argv):
     response.status_code = 500
     return response
 
+
 def movie_detail(request, movie_id):
-    html = "movie_detail.html"    
-    movie = Movie.objects.get(id=movie_id)    
+    html = "movie_detail.html"
+    movie = Movie.objects.get(id=movie_id)
     if request.user.is_authenticated:
         user = IMDbUser.objects.get(id=request.user.id)
-        ids = list(History.objects.all().values_list('movie_id', flat=True))               
-        if movie_id not in ids:       
+        ids = list(History.objects.all().values_list('movie_id', flat=True))
+        if movie_id not in ids:
             hist_obj = History.objects.create(
-            title = movie.title,
-            movie_id = movie_id
+                title=movie.title,
+                movie_id=movie_id
             )
             user.recently_viewed.add(hist_obj)
             user.save()
-        else:           
-            hist_obj = History.objects.get(movie_id=movie_id)            
+        else:
+            hist_obj = History.objects.get(movie_id=movie_id)
             user.recently_viewed.remove(hist_obj)
             user.save()
-            hist_obj.delete()          
+            hist_obj.delete()
 
             hist_obj = History.objects.create(
-            title = movie.title,
-            movie_id = movie_id
+                title=movie.title,
+                movie_id=movie_id
             )
             user.recently_viewed.add(hist_obj)
-            user.save()  
+            user.save()
 
     reviews = Review.objects.filter(movie=movie)
     context = {"movie": movie, "reviews": reviews}
@@ -192,12 +202,14 @@ def review_submission(request, movie_id):
             get_movie.counting += 1
             sum_total_of_rating = get_movie.counting * get_movie.rating
             print(sum_total_of_rating)
-            get_movieq.rating = round((sum_total_of_rating + new_review.stars) / get_movie.counting, 1)
+            get_movie.rating = round(
+                (sum_total_of_rating + new_review.stars) / get_movie.counting, 1)
             get_movie.save()
             return HttpResponseRedirect(reverse("homepage"))
     form = ReviewForm()
     context = {'form': form}
     return render(request, html, context)
+
 
 class SearchFormView(View):
     def get(self, request):
@@ -205,8 +217,9 @@ class SearchFormView(View):
         context = {}
         return render(request, html, context)
 
+
 class SearchResultsView(View):
-    def get(self, request):             
+    def get(self, request):
         html = 'search_results.html'
         search_query = self.request.GET.get('q')
         results = Movie.objects.filter(
@@ -214,7 +227,8 @@ class SearchResultsView(View):
         )
         context = {'results': results, 'search_query': search_query}
         return render(request, html, context)
-        
+
+
 def SearchFormAutocomplete(request):
     html = 'search_form.html'
     if 'term' in request.GET:
