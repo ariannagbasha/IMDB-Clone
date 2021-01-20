@@ -12,6 +12,9 @@ https://css-tricks.com/video-screencasts/171-movable-stacked-card-row-in-css/
 body {
   background-color: var(--mainColor);
   color: var(--textColor);
+  background-image: url('../images/wallhaven-j5dp2y.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 h1,
