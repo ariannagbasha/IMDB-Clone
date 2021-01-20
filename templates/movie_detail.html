@@ -1,3 +1,5 @@
+{% load static %}
+'<link rel="stylesheet" href="{% static 'css/style.css' %}">
 
 <style>
     h3 {
@@ -17,10 +19,10 @@
 <h3><a href='/logout/'>Log out</a></h3>
 <br><br>
 
-<strong>Title: {{ movie.title }} </strong> 
-<strong>Stars: {{ movie.stars }} </strong> 
-<strong>Stars: {{ movie.rating }} </strong> 
-<strong>Crew: {{ movie.crew }} </strong> 
+<h1><strong>Title: {{ movie.title }} </strong></h1> 
+<h2><strong>Stars: {{ movie.stars }} </strong> </h2>
+<h3><strong>Stars: {{ movie.rating }} </strong> </h3>
+<h4><strong>Crew: {{ movie.crew }} </strong> </h4>
 
 <img src="{{ movie.image }}"/>
 {% if request.user.is_authenticated %}

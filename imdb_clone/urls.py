@@ -20,6 +20,7 @@ from django.conf.urls import handler404, handler500, url
 from imdb_app import views as imdb_app_views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 
 urlpatterns = [
@@ -35,11 +36,14 @@ urlpatterns = [
     path('success/', views.sign_up_success, name='success'),
     path('error_500', views.handler500, name="handler500"),
     path('error_404', views.handler404, name="handler404"),
-    path("movie_detail/<int:movie_id>/", views.movie_detail, name="movie_detail"),
+    path("movie_detail/<int:movie_id>/",
+         views.movie_detail, name="movie_detail"),
     path("reviews/<int:movie_id>/", views.review_submission, name="review"),
     path("search/", views.SearchFormView.as_view(), name="search_form"),
     path("search_results/", views.SearchResultsView.as_view(), name="search_results"),
-    path("searchautocomplete/", views.SearchFormAutocomplete, name='searchautocomplete')
+    path("searchautocomplete/", views.SearchFormAutocomplete,
+         name='searchautocomplete')
 ]
+urlpatterns += staticfiles_urlpatterns()
 handler404 = 'imdb_app.views.handler404'
 handler500 = 'imdb_app.views.handler500'
