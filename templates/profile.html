@@ -2,30 +2,23 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 
-<style>
-    h3 {
-        display: inline
-    }
-</style>
-
 {% if not request.user.is_superuser %}
-
 
 <br><br>
     {{ user.username }}'s Profile
     <br><br>
     Name: {{ user.first_name }} {{ user.last_name }}
     <br>
-    Email: {{ user.email }}
+    Email: <a href='mailto:{{ user.email }}'>{{ user.email }}</a>
     <br><br>
-    Pass: 
+    Seen It: 
     <ul>
     {% for movie in seen_movies %}
         <li><a href='/movie_detail/{{movie.id}}'>{{ movie.title }}</a></li>
     {% endfor %}
     </ul>
     <br>
-    Trash:
+    Watchlist:
     <ul>
     {% for movie in want_list_movies %}
          <li><a href='/movie_detail/{{movie.id}}'>{{ movie.title }}</a></li>

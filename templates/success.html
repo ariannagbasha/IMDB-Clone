@@ -1,1 +1,14 @@
-Your account has been successfully registered! Click <a href='/'>here</a> to return to the homepage.
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+{% if request.method == 'POST' %}
+    Your account has been successfully registered! Click <a href='/'>here</a> to return to the homepage.
+{% else %}
+    <h4>Well...this is unexpected. Here are your options:</h4>
+    <ol>
+        <li><a href='/sign_up/'>Create an account.</a></li>
+        <li><a href='/login/'>Log in.</a></li>
+        <li><a href='/static/images/gameover.jpeg'>Give up.</a></li>
+        <li><a href='http://lankami.tk/'>NEVER give up...</a></li>
+    </ol>
+{% endif %}
+
