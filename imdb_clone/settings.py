@@ -15,14 +15,16 @@ import os
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+
+
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = '(dczx%(c=s)tjx_d-k5t4vs^f6@5hiuz5q7fi476bh@stn!b2z'
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = "dsd!vcadrk3p&h%a8ij%c*o_c5r1%_&0azmlxx++jooe%f_e*("
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -58,7 +60,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [BASE_DIR / 'templates'],
-        'APP_DIRS': False,
+        'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -120,13 +122,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_URL = '/sytatic/'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static/"),
 )
-
 LOGIN_URL = '/login/'
 AUTH_USER_MODEL = "imdb_app.IMDbUser"

@@ -1,6 +1,5 @@
 {
     "emmet.includeLanguages": {
         "django-html": "html",
-    },
-    "python.pythonPath": "/bin/python3"
+    }
 }
