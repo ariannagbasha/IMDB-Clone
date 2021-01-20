@@ -25,14 +25,11 @@ class Index(View):
         if request.user.is_authenticated:
             user = IMDbUser.objects.get(id=request.user.id)
             watchlist = user.want_list_movies.all()
-        # full_recently_viewed = [Movie.objects.get(id=x.id) for x in recently_viewed]
-        # for movie in recently_viewed:
-        #     movie = Movie.objects.get(id=movie.id)
         context = {'image': image, 'movies': top_ten_movies, 'watchlist': watchlist, 'random': random_movies, 'recently_viewed': recently_viewed}
         return render(request, html, context)
 
 class Movies(View):
-    def get(self, request):        
+    def get(self, request):
         movies = Movie.objects.all().order_by('title')
         html = 'movies.html'
         context = {'movies': movies}
@@ -156,8 +153,7 @@ def movie_detail(request, movie_id):
         if movie_id not in ids:       
             hist_obj = History.objects.create(
             title = movie.title,
-            movie_id = movie_id,
-            image = movie.image
+            movie_id = movie_id
             )
             user.recently_viewed.add(hist_obj)
             user.save()
@@ -169,8 +165,7 @@ def movie_detail(request, movie_id):
 
             hist_obj = History.objects.create(
             title = movie.title,
-            movie_id = movie_id,
-            image = movie.image
+            movie_id = movie_id
             )
             user.recently_viewed.add(hist_obj)
             user.save()  
@@ -197,7 +192,7 @@ def review_submission(request, movie_id):
             get_movie.counting += 1
             sum_total_of_rating = get_movie.counting * get_movie.rating
             print(sum_total_of_rating)
-            get_movie.rating = round((sum_total_of_rating + new_review.stars) / get_movie.counting, 1)
+            get_movieq.rating = round((sum_total_of_rating + new_review.stars) / get_movie.counting, 1)
             get_movie.save()
             return HttpResponseRedirect(reverse("homepage"))
     form = ReviewForm()

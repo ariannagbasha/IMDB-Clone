@@ -18,14 +18,14 @@
     <br>
     Email: {{ user.email }}
     <br><br>
-    Pass: 
+    Movies I've seen: 
     <ul>
     {% for movie in seen_movies %}
         <li><a href='/movie_detail/{{movie.id}}'>{{ movie.title }}</a></li>
     {% endfor %}
     </ul>
     <br>
-    Trash:
+    Movies on my watchlist:
     <ul>
     {% for movie in want_list_movies %}
          <li><a href='/movie_detail/{{movie.id}}'>{{ movie.title }}</a></li>

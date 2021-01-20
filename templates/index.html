@@ -10,7 +10,7 @@
         <h4>Welcome back, <a href='/user/{{user.id}}'>{{ request.user.username }}</a>! </h4>    
     {% endif %}
     {% endblock %}
-    <div class="movies" id="darkMode">
+    <div class="movies" id="lightMode">
         
         {% if request.user.is_authenticated and watchlist != '' %}
             <section class="watchlist">
@@ -61,27 +61,15 @@
                 {% endfor %}
             </div>
         </section>
-        
-        {% if request.user.is_authenticated and recently_viewed != '' %}
-            <section class="recentlyViewed">
-                <header>
-                    <h2>Recently Viewed</h2>
-                </header>
-                <div class="cards">
-                    
-                    {% for movie in recently_viewed %}
-                        <div class="card">
-                            <a href="/movie_detail/{{ movie.movie_id }}">
-                                <img class="movie" src="https://tiny.pictures/api/demo/?width=300&height=300&source={{movie.image}}" alt={{ movie.title }} loading="lazy">
-                            </a>
-                        </div>
-                    
-                    {% endfor %}
-            
-                </div>
-            </section>
-        {% endif %}
     </div>
 </div>
 <br>
+{% if recently_viewed %}
+    Recently Viewed:
+    <ul>
+        {% for movie in recently_viewed %}
+            <li><a href='/movie_detail/{{ movie.movie_id }}/'>{{ movie.title }}</a></li>
+        {% endfor %}
+    </ul>
+{% endif %}
 </body>

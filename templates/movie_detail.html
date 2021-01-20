@@ -1,18 +1,11 @@
-
 <style>
     h3 {
         display: inline
     }
-    img {
-        height: 300px;
-        width: 300px;
-    }
 </style>
 
 <h3><a href='/movies/'>All Movies</a></h3> | 
-{% if request.user.is_authenticated %}
-    <h3><a href='/user/{{user.id}}/'>Profile</a></h3> | 
-{% endif %}
+<h3><a href='/user/{{user.id}}/'>Profile</a></h3> | 
 <h3><a href='/'>Return to Homepage</a> | 
 <h3><a href='/logout/'>Log out</a></h3>
 <br><br>
@@ -23,12 +16,8 @@
 <strong>Crew: {{ movie.crew }} </strong> 
 
 <img src="{{ movie.image }}"/>
-{% if request.user.is_authenticated %}
-    <button><a href='/seen/{{ movie.id }}'>I've seen this</a></button>
-    <button><a href='/watchlist/{{ movie.id }}'>I want to see this</a></button>
-    <a href='/reviews/{{ movie.id }}'> Review </a>
-{% endif %}
-
+<button><a href='/seen/{{ movie.id }}'>I've seen this</a></button>
+<button><a href='/watchlist/{{ movie.id }}'>I want to see this</a></button>
 
 {% for review in reviews%}
 
