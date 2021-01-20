@@ -1,6 +1,11 @@
+
 <style>
     h3 {
         display: inline
+    }
+    img {
+        height: 300px;
+        width: 300px;
     }
 </style>
 
@@ -21,7 +26,9 @@
 {% if request.user.is_authenticated %}
     <button><a href='/seen/{{ movie.id }}'>I've seen this</a></button>
     <button><a href='/watchlist/{{ movie.id }}'>I want to see this</a></button>
+    <a href='/reviews/{{ movie.id }}'> Review </a>
 {% endif %}
+
 
 {% for review in reviews%}
 
