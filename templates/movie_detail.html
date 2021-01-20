@@ -5,7 +5,9 @@
 </style>
 
 <h3><a href='/movies/'>All Movies</a></h3> | 
-<h3><a href='/user/{{user.id}}/'>Profile</a></h3> | 
+{% if request.user.is_authenticated %}
+    <h3><a href='/user/{{user.id}}/'>Profile</a></h3> | 
+{% endif %}
 <h3><a href='/'>Return to Homepage</a> | 
 <h3><a href='/logout/'>Log out</a></h3>
 <br><br>
@@ -15,9 +17,11 @@
 <strong>Stars: {{ movie.rating }} </strong> 
 <strong>Crew: {{ movie.crew }} </strong> 
 
-<img src="{{ movie.image }}" height="300" width="300"/>
-<button><a href='/seen/{{ movie.id }}'>I've seen this</a></button>
-<button><a href='/watchlist/{{ movie.id }}'>I want to see this</a></button>
+<img src="{{ movie.image }}"/>
+{% if request.user.is_authenticated %}
+    <button><a href='/seen/{{ movie.id }}'>I've seen this</a></button>
+    <button><a href='/watchlist/{{ movie.id }}'>I want to see this</a></button>
+{% endif %}
 
 {% for review in reviews%}
 
