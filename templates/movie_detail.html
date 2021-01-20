@@ -1,47 +1,29 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-<style>
-    h3 {
-        display: inline
-    }
-    img {
-        height: 300px;
-        width: 300px;
-    }
-</style>
-
-{% comment %} <h3><a href='/movies/'>All Movies</a></h3> | 
-{% if request.user.is_authenticated %}
-    <h3><a href='/user/{{user.id}}/'>Profile</a></h3> | 
-{% endif %}
-<h3><a href='/'>Return to Homepage</a> | 
-<h3><a href='/logout/'>Log out</a></h3>
-<br><br> {% endcomment %}
-
  {% include 'navbar.html'  %}
 
- {% block content %}
+{% block content %}
 
-<h1><strong>Title: {{ movie.title }} </strong></h1> 
-<h2><strong>Stars: {{ movie.stars }} </strong> </h2>
-<h3><strong>Stars: {{ movie.rating }} </strong> </h3>
+<h2><strong>Title: {{ movie.title }} </strong></h2>
+<h3><strong>Rating: {{ movie.rating }} </strong> </h3>
 <h4><strong>Crew: {{ movie.crew }} </strong> </h4>
 
-<img src="{{ movie.image }}"/>
+<img src="{{ movie.image }}">
 {% if request.user.is_authenticated %}
-    <button><a href='/seen/{{ movie.id }}'>I've seen this</a></button>
-    <button><a href='/watchlist/{{ movie.id }}'>I want to see this</a></button>
-    <a href='/reviews/{{ movie.id }}'> Review </a>
+<p>
+    <button class='button-text'><a href='/seen/{{ movie.id }}'>I've seen this</a></button>
+    <button class='button-text'><a href='/watchlist/{{ movie.id }}'>Add to watchlist</a></button>    
+</p>
 {% endif %}
 
 
-{% for review in reviews%}
+{% comment %} {% for review in reviews%}
 
     <li>Review: {{ review.title }}</li>
     <li>By: {{ review.author}}</li>
 
-{% endfor %}
+{% endfor %} {% endcomment %}
 {% endblock %}
 
 

@@ -15,13 +15,6 @@ class SignUpForm(forms.Form):
     email = forms.CharField(max_length=254, required=True)
     password = forms.CharField(widget=forms.PasswordInput)
 
-    # class Meta:
-    #     model = IMDbUser
-    #     fields = [
-    #         "first_name",
-    #         "last_name",
-    #     ]
-
 
 class ReviewForm(forms.Form):
     title = forms.CharField(max_length=50)
