@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "dsd!vcadrk3p&h%a8ij%c*o_c5r1%_&0azmlxx++jooe%f_e*("
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -122,12 +122,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-STATIC_URL = '/sytatic/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
-
+STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static/"),
+)
 LOGIN_URL = '/login/'
 AUTH_USER_MODEL = "imdb_app.IMDbUser"
