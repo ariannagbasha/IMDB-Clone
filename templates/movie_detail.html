@@ -1,5 +1,5 @@
 {% load static %}
-'<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
 
 <style>
     h3 {
@@ -11,13 +11,17 @@
     }
 </style>
 
-<h3><a href='/movies/'>All Movies</a></h3> | 
+{% comment %} <h3><a href='/movies/'>All Movies</a></h3> | 
 {% if request.user.is_authenticated %}
     <h3><a href='/user/{{user.id}}/'>Profile</a></h3> | 
 {% endif %}
 <h3><a href='/'>Return to Homepage</a> | 
 <h3><a href='/logout/'>Log out</a></h3>
-<br><br>
+<br><br> {% endcomment %}
+
+ {% include 'navbar.html'  %}
+
+ {% block content %}
 
 <h1><strong>Title: {{ movie.title }} </strong></h1> 
 <h2><strong>Stars: {{ movie.stars }} </strong> </h2>
@@ -38,5 +42,6 @@
     <li>By: {{ review.author}}</li>
 
 {% endfor %}
+{% endblock %}
 
 
