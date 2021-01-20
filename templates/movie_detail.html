@@ -1,6 +1,11 @@
+
 <style>
     h3 {
         display: inline
+    }
+    img {
+        height: 300px;
+        width: 300px;
     }
 </style>
 
@@ -16,8 +21,9 @@
 <strong>Crew: {{ movie.crew }} </strong> 
 
 <img src="{{ movie.image }}"/>
-<button><a href='/seen/{{ movie.id }}'>I've seen this</a></button>
-<button><a href='/watchlist/{{ movie.id }}'>I want to see this</a></button>
+<button><a href='/seen/{{ movie.id }}'>Trash</a></button>
+<button><a href='/watchlist/{{ movie.id }}'>Pass</a></button>
+<a href='/reviews/{{ movie.id }}'> Review </a>
 
 {% for review in reviews%}
 

@@ -11,7 +11,7 @@
 
 <ul>
 {% for movie in movies %}
-    <li><a href="/movie_detail/{{ movie.id }}/">{{ movie.title }}</a> <a href='/seen/{{ movie.id }}'>I've seen this</a>  <a href='/watchlist/{{ movie.id }}'>I want to see this</a></li> 
+    <li><a href="/movie_detail/{{ movie.id }}/">{{ movie.title }}</a> <a href='/seen/{{ movie.id }}'>Trash</a>  <a href='/watchlist/{{ movie.id }}'>Pass</a></li> 
 {% endfor %}
 </ul>
 
