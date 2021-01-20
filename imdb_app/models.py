@@ -35,6 +35,7 @@ class IMDbUser(AbstractUser):
 class History(models.Model):
     title = models.CharField(max_length=350)
     movie_id = models.IntegerField(blank=True, null=True)
+    image = models.URLField(max_length=1000)
 
     def __str__(self):
         return self.title
