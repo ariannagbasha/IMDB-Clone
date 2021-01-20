@@ -10,7 +10,7 @@
         <h4>Welcome back, <a href='/user/{{user.id}}'>{{ request.user.username }}</a>! </h4>    
     {% endif %}
     {% endblock %}
-    <div class="movies" id="lightMode">
+    <div class="movies" id="darkMode">
         
         {% if request.user.is_authenticated and watchlist != '' %}
             <section class="watchlist">

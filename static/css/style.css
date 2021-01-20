@@ -109,7 +109,8 @@ nav ul li:not(:first-child) {
 }
 
 .movies {
-  background-color: var(--mainColor);
+  /* background-color: var(--mainColor); */
+  background-image: url('/static/images/wallhaven-j5dp2y.jpg');
   display: grid;
   place-items: center flex-start;
   color: var(--textColor);
