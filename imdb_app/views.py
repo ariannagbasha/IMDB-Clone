@@ -39,7 +39,7 @@ def seen_list(request, movie_id):
     movie = Movie.objects.get(id=movie_id)
     user.seen_movies.add(movie)
     user.save()
-    return redirect('/movies/')
+    return redirect(f'/movie_detail/{movie_id}/')
 
 @login_required
 def watchlist(request, movie_id):
@@ -47,7 +47,7 @@ def watchlist(request, movie_id):
     movie = Movie.objects.get(id=movie_id)
     user.want_list_movies.add(movie)
     user.save()
-    return redirect('/movies/')
+    return redirect(f'/movie_detail/{movie_id}/')
 
 class UserProfileView(LoginRequiredMixin, View):
     def get(self, request, user_id):
@@ -170,34 +170,34 @@ def movie_detail(request, movie_id):
             user.recently_viewed.add(hist_obj)
             user.save()  
 
-    reviews = Review.objects.filter(movie=movie)
-    context = {"movie": movie, "reviews": reviews}
+    # reviews = Review.objects.filter(movie=movie)
+    context = {"movie": movie}
     return render(request, html, context)
 
 
-def review_submission(request, movie_id):
-    html = "generic_form.html"
-    get_movie = Movie.objects.get(id=movie_id)
-    if request.method == "POST":
-        form = ReviewForm(request.POST)
-        if form.is_valid():
-            data = form.cleaned_data
-            new_review = Review.objects.create(
-                title=data['title'],
-                movie=get_movie,
-                author=request.user,
-                stars=data['stars']
-            )
-            new_review.save()
-            get_movie.counting += 1
-            sum_total_of_rating = get_movie.counting * get_movie.rating
-            print(sum_total_of_rating)
-            get_movie.rating = round((sum_total_of_rating + new_review.stars) / get_movie.counting, 1)
-            get_movie.save()
-            return HttpResponseRedirect(reverse("homepage"))
-    form = ReviewForm()
-    context = {'form': form}
-    return render(request, html, context)
+# def review_submission(request, movie_id):
+#     html = "generic_form.html"
+#     get_movie = Movie.objects.get(id=movie_id)
+#     if request.method == "POST":
+#         form = ReviewForm(request.POST)
+#         if form.is_valid():
+#             data = form.cleaned_data
+#             new_review = Review.objects.create(
+#                 title=data['title'],
+#                 movie=get_movie,
+#                 author=request.user,
+#                 stars=data['stars']
+#             )
+#             new_review.save()
+#             get_movie.counting += 1
+#             sum_total_of_rating = get_movie.counting * get_movie.rating
+#             print(sum_total_of_rating)
+#             get_movie.rating = round((sum_total_of_rating + new_review.stars) / get_movie.counting, 1)
+#             get_movie.save()
+#             return HttpResponseRedirect(reverse("homepage"))
+#     form = ReviewForm()
+#     context = {'form': form}
+#     return render(request, html, context)
 
 class SearchFormView(View):
     def get(self, request):

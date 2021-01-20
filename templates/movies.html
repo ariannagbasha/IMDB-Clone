@@ -69,15 +69,8 @@
 
      }
 </style>
-{% comment %} 
-<h3><a href='/movies/'>All Movies</a></h3> | 
-{% if request.user.is_authenticated %}
-    <h3><a href='/user/{{user.id}}/'>Profile</a></h3> | 
-{% endif %}
-<h3><a href='/'>Return to Homepage</a> | 
-<h3><a href='/logout/'>Log out</a></h3> {% endcomment %}
+
 <body>
-{% comment %}  {% endcomment %}
     <div class="container">
     {% for movie in movies %}
        <a href="/movie_detail/{{ movie.id }}"> <div class="box">

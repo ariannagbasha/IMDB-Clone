@@ -164,3 +164,13 @@ nav ul li:not(:first-child) {
   height: 100%;
   width: 100%;
 }
+
+img {
+  height: 300px;
+  width: 300px;
+}
+
+.button-text {
+  background-color: black;
+}
+
