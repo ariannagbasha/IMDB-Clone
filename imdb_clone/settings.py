@@ -29,7 +29,7 @@ SECRET_KEY = "dsd!vcadrk3p&h%a8ij%c*o_c5r1%_&0azmlxx++jooe%f_e*("
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['adarkermovieapp.herokuapp.com/', '127.0.0.1']
+ALLOWED_HOSTS = ['adarkermovieapp.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -133,3 +133,4 @@ STATICFILES_DIRS = (
 MEDIA_ROOT =  os.path.join(BASE_DIR, 'static/images')
 LOGIN_URL = '/login/'
 AUTH_USER_MODEL = "imdb_app.IMDbUser"
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
