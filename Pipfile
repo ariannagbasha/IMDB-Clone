@@ -8,6 +8,7 @@ django = "*"
 requests = "*"
 django-environ = "*"
 gunicorn = "*"
+whitenoise = "*"
 
 [dev-packages]
 
