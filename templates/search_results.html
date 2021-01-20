@@ -1,5 +1,8 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+{% include 'navbar.html' %}
+<br>
 <h1>Search Results for "{{ search_query }}"</h1>
 
     {% for result in results %}
