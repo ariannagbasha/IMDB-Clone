@@ -7,6 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from imdb_app.models import IMDbUser, Movie, Review, History
 from django.db.models import Q
 from django.http import JsonResponse
+from django.contrib.auth.forms import UserCreationForm 
 
 
 

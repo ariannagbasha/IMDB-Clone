@@ -2,8 +2,6 @@
 Used Movable Card Row Tutorial:
 https://css-tricks.com/video-screencasts/171-movable-stacked-card-row-in-css/
 */
-/* {% load static %} */
-
 
 :root {
   --mainColor: rgb(0, 0, 0);
