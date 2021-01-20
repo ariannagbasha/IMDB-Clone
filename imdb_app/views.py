@@ -29,7 +29,7 @@ class Index(View):
         return render(request, html, context)
 
 class Movies(View):
-    def get(self, request):
+    def get(self, request):        
         movies = Movie.objects.all().order_by('title')
         html = 'movies.html'
         context = {'movies': movies}
@@ -192,7 +192,7 @@ def review_submission(request, movie_id):
             get_movie.counting += 1
             sum_total_of_rating = get_movie.counting * get_movie.rating
             print(sum_total_of_rating)
-            get_movieq.rating = round((sum_total_of_rating + new_review.stars) / get_movie.counting, 1)
+            get_movie.rating = round((sum_total_of_rating + new_review.stars) / get_movie.counting, 1)
             get_movie.save()
             return HttpResponseRedirect(reverse("homepage"))
     form = ReviewForm()
