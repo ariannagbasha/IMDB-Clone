@@ -27,9 +27,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "dsd!vcadrk3p&h%a8ij%c*o_c5r1%_&0azmlxx++jooe%f_e*("
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['adarkermovieapp.herokuapp.com/', '127.0.0.1']
 
 
 # Application definition
